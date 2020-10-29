@@ -15,7 +15,7 @@ from apps import create_app
 app = create_app(getenv('FLASK_ENV') or 'default')
 
 if __name__ == '__main__':
-    ip = '0.0.0.0'
+    ip = '192.168.1.5'
     port = app.config['APP_PORT']
     debug = app.config['DEBUG']
 
