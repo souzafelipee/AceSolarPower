@@ -3,7 +3,7 @@ from os import getenv
 
 class Config:
     SECRET_KEY = getenv('SECRET_KEY') or 'uma string randômica e gigante'
-    APP_PORT = int(getenv('APP_PORT'))
+    PORT = int(getenv('PORT'))
     DEBUG = eval(getenv('DEBUG').title())
     #POSTGRES_HOST = getenv('POSTGRES_URI')
     from dao import Session
