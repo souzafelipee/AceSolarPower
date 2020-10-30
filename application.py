@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 pastaAtual = dirname(__file__)
 _ENV_FILE = pastaAtual + '/.env'
 # existindo o arquivo faça a leitura do arquivo através da função load_dotenv
+print(_ENV_FILE)
 if isfile(_ENV_FILE):
     load_dotenv(dotenv_path=_ENV_FILE)
 
