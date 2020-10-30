@@ -14,8 +14,14 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 
+class ProductionConfig(Config):
+    FLASK_ENV = 'production'
+    DEBUG = False
+
+
 config = {
     'development': DevelopmentConfig,
+    'production': ProductionConfig,
     'default': DevelopmentConfig
 }
 
