@@ -6,7 +6,7 @@ from apps.resources.ClienteResource import CadastrarCliente
 # Criamos uma classe que extende de Resource
 class Index(Resource):
     def get(self):
-        return {'status': 'O servidor está ON! HIKEN!'}
+        return {'status': 'O servidor esta ON! HIKEN!'}
 
 
 # Instânciamos a API do FlaskRestful
