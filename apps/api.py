@@ -5,12 +5,8 @@ from apps.resources.ClienteResource import CadastrarCliente
 
 # Criamos uma classe que extende de Resource
 class Index(Resource):
-    # Definimos a operação get do protocolo http
     def get(self):
-        print('entrou no get')
-        # retornamos um simples dicionário que será automáticamente
-        # retornado em json pelo flask
-        return {'hello': 'world by apps'}
+        return {'status': 'O servidor está ON! HIKEN!'}
 
 
 # Instânciamos a API do FlaskRestful
