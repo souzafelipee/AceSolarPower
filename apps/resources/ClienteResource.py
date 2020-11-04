@@ -12,7 +12,6 @@ class CadastrarCliente(Resource):
         req = request.get_json() or None
         schema = ClienteSchema()
         novoCliente = ''
-
         try:
             novoCliente = schema.load(req)
         except ValidationError as e:
