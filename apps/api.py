@@ -1,6 +1,6 @@
 # Importamos as classes API e Resource
 from flask_restful import Api, Resource
-from apps.resources.ClienteResource import CadastrarCliente
+from apps.resources.ClienteResource import CadastrarCliente,ObterCliente
 
 
 # Criamos uma classe que extende de Resource
@@ -17,6 +17,7 @@ def configure_api(app):
     # adicionamos na rota '/' a sua classe correspondente Index
     api.add_resource(Index, '/')
     api.add_resource(CadastrarCliente, '/cliente')
+    api.add_resource(ObterCliente, '/cliente/<int:codCliente>')
 
     # inicializamos a api com as configurações do flask vinda por parâmetro
     api.init_app(app)

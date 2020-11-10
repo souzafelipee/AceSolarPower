@@ -27,4 +27,26 @@ class CadastrarCliente(Resource):
             'Cliente', 'Cliente cadastrado com sucesso', data=result,
         )
 
+    def get(self):
+        session = Session()
+        clientes = session.query(Cliente).all()
+        schema = ClienteSchema(many=True)
+        result = schema.dump(clientes)
+        return result
+
+
+class ObterCliente(Resource):
+    def get(self, codCliente):
+        print(codCliente)
+        session = Session()
+        query = session.query(Cliente).filter(Cliente.codCliente == codCliente)
+        cliente = query.one()
+        print(cliente)
+        schema = ClienteSchema()
+        result = schema.dump(cliente)
+        print(result)
+        return result
+
+
+
 
