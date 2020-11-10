@@ -11,7 +11,6 @@ class CadastrarCliente(Resource):
     def post(self, *args, **kwargs):
         req = request.get_json() or None
         schema = ClienteSchema()
-        novoCliente = ''
         try:
             novoCliente = schema.load(req)
         except ValidationError as e:
@@ -37,15 +36,31 @@ class CadastrarCliente(Resource):
 
 class ObterCliente(Resource):
     def get(self, codCliente):
-        print(codCliente)
         session = Session()
         query = session.query(Cliente).filter(Cliente.codCliente == codCliente)
         cliente = query.one()
-        print(cliente)
         schema = ClienteSchema()
         result = schema.dump(cliente)
-        print(result)
         return result
+
+    def post(self, codCliente):
+        req = request.get_json() or None
+        print(req)
+        schema = ClienteSchema()
+        try:
+            clienteAtualizado = schema.load(req)
+        except ValidationError as e:
+            return resp_exception('Cliente', description=str(e.messages))
+        except Exception as e:
+            return resp_exception('Cliente', description=str(e))
+        session = Session()
+        session.query(Cliente).filter(Cliente.codCliente == codCliente).update(req, synchronize_session=False)
+        session.commit()
+        result = schema.dump(clienteAtualizado)
+        # Retorno 200 o meu endpoint
+        return resp_ok(
+            'Cliente', 'Cliente atualizado com sucesso', data=result,
+        )
 
 
 
