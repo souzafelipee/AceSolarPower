@@ -1,5 +1,7 @@
 from engine import Base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from .ClienteUnidadeConsumidora import ClienteUnidadeConsumidora
 
 
 class Cliente(Base):
@@ -9,6 +11,8 @@ class Cliente(Base):
     cnpjCpf = Column(String, nullable=False)
     celular = Column(String)
     email = Column(String)
+    unidadesConsumidoras = relationship("ClienteUnidadeConsumidora")
+
 
     #def __repr__(self):
         #return "<Cliente(nome={self.nome!r}, cnpjCpf={self.nome!r})>".format(self=self)

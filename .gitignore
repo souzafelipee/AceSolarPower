@@ -12,3 +12,5 @@ env/
 *.egg-info
 .vscode
 .cache/
+yarn.lock
+.yarn-integrity
