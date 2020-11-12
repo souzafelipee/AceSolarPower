@@ -34,6 +34,16 @@ class CadastrarCliente(Resource):
         return result
 
 
+class ObterClientesPorNome(Resource):
+    def get(self, nomeCliente):
+        session = Session()
+        query = session.query(Cliente).filter(Cliente.nome.ilike('%'+nomeCliente+'%'))
+        cliente = query.all()
+        schema = ClienteSchema(many=True)
+        result = schema.dump(cliente)
+        return result
+
+
 class ObterCliente(Resource):
     def get(self, codCliente):
         session = Session()

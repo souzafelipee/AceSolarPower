@@ -2,7 +2,7 @@ import enum
 
 
 class FasesEnum(enum.Enum):
-    Monofasico = 1
-    Bifasico = 2
-    Trifasico = 3
+    Monofasico = 'Monofasico'
+    Bifasico = 'Bifasico'
+    Trifasico = 'Trifasico'
 
