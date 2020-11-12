@@ -10,12 +10,16 @@ from apps.responses import *
 class CadastrarCliente(Resource):
     def post(self, *args, **kwargs):
         req = request.get_json() or None
+        print(req)
         schema = ClienteSchema()
         try:
             novoCliente = schema.load(req)
+            print(novoCliente)
         except ValidationError as e:
+            print('erro de validação')
             return resp_exception('Cliente', description=str(e.messages))
         except Exception as e:
+            print('exception normal')
             return resp_exception('Cliente', description=str(e))
         session = Session()
         session.add(novoCliente)
