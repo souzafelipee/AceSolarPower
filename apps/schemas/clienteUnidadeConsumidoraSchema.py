@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema
 from marshmallow.fields import Str, Int, Float
 from marshmallow_enum import EnumField
 from apps.models.ClassesEnum import ClassesEnum

@@ -13,6 +13,3 @@ class Cliente(Base):
     email = Column(String)
     unidadesConsumidoras = relationship("ClienteUnidadeConsumidora")
 
-
-    #def __repr__(self):
-        #return "<Cliente(nome={self.nome!r}, cnpjCpf={self.nome!r})>".format(self=self)
