@@ -68,7 +68,7 @@ class ObterCliente(Resource):
         except Exception as e:
             return resp_exception('Cliente', description=str(e))
         session = Session()
-        session.query(Cliente).filter(Cliente.codCliente == codCliente).update(req, synchronize_session=False)
+        session.query(Cliente).filter(Cliente.codCliente == codCliente).update(clienteAtualizado)
         session.commit()
         result = schema.dump(clienteAtualizado)
         # Retorno 200 o meu endpoint

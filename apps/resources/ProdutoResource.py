@@ -10,13 +10,35 @@ from apps.responses import *
 class CadastrarProduto(Resource):
     def post(self, *args, **kwargs):
         req = request.get_json() or None
+        if 'tipoProduto' in req:
+            if req['tipoProduto'] == '':
+                req.pop('tipoProduto')
+        if 'tipoInversor' in req:
+            if req['tipoInversor'] == '':
+                req.pop('tipoInversor')
+        if 'tipoEstrutura' in req:
+            if req['tipoEstrutura'] == '':
+                req.pop('tipoEstrutura')
+        if 'tipoModulo' in req:
+            if req['tipoModulo'] == '':
+                req.pop('tipoModulo')
+        if 'custoMedioMensal' in req:
+            if req['custoMedioMensal'] == '':
+                req.pop('custoMedioMensal')
+        if 'custoUltimaCompra' in req:
+            if req['custoUltimaCompra'] == '':
+                req.pop('custoUltimaCompra')
+        if 'potencia' in req:
+            if req['potencia'] == '':
+                req.pop('potencia')
+        print(req)
         schema = ProdutoSchema()
         try:
             novoProduto = schema.load(req)
         except ValidationError as e:
-            return resp_exception('Cliente', description=str(e.messages))
+            return resp_exception('Produto', description=str(e.messages))
         except Exception as e:
-            return resp_exception('Cliente', description=str(e))
+            return resp_exception('Produto', description=str(e))
         session = Session()
         session.add(novoProduto)
         session.commit()
@@ -55,6 +77,27 @@ class ObterProduto(Resource):
 
     def post(self, codProduto):
         req = request.get_json() or None
+        if 'tipoProduto' in req:
+            if req['tipoProduto'] == '':
+                req.pop('tipoProduto')
+        if 'tipoInversor' in req:
+            if req['tipoInversor'] == '':
+                req.pop('tipoInversor')
+        if 'tipoEstrutura' in req:
+            if req['tipoEstrutura'] == '':
+                req.pop('tipoEstrutura')
+        if 'tipoModulo' in req:
+            if req['tipoModulo'] == '':
+                req.pop('tipoModulo')
+        if 'custoMedioMensal' in req:
+            if req['custoMedioMensal'] == '':
+                req.pop('custoMedioMensal')
+        if 'custoUltimaCompra' in req:
+            if req['custoUltimaCompra'] == '':
+                req.pop('custoUltimaCompra')
+        if 'potencia' in req:
+            if req['potencia'] == '':
+                req.pop('potencia')
         schema = ProdutoSchema()
         try:
             produtoAtualizado = schema.load(req)
