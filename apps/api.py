@@ -2,6 +2,7 @@
 from flask_restful import Api, Resource
 from apps.resources.ClienteResource import CadastrarCliente, ObterCliente, ObterClientesPorNome
 from apps.resources.ProdutoResource import CadastrarProduto, ObterProduto, ObterProdutosPorNome
+from apps.resources.KitResource import CadastrarKit, ObterKit, ObterKitPorNome
 
 
 # Criamos uma classe que extende de Resource
@@ -23,6 +24,9 @@ def configure_api(app):
     api.add_resource(CadastrarProduto, '/produto')
     api.add_resource(ObterProduto, '/produto/<int:codProduto>')
     api.add_resource(ObterProdutosPorNome, '/produto/nome/<string:nomeProduto>')
+    api.add_resource(CadastrarKit, '/kit')
+    api.add_resource(ObterKit, '/kit/<int:codKit>')
+    api.add_resource(ObterKitPorNome, '/kit/nome/<string:nomeKit>')
 
 
     # inicializamos a api com as configurações do flask vinda por parâmetro

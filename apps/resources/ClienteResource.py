@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 from apps.models.Cliente import Cliente
+from apps.models.ClienteUnidadeConsumidora import ClienteUnidadeConsumidora
 from apps.schemas.clienteSchema import ClienteSchema
 from dao import Session
 from apps.responses import *
@@ -59,7 +60,8 @@ class ObterCliente(Resource):
 
     def post(self, codCliente):
         req = request.get_json() or None
-        print(req)
+        unidadesConsumidoras = req['unidadesConsumidoras']
+        req.pop('unidadesConsumidoras')
         schema = ClienteSchema()
         try:
             clienteAtualizado = schema.load(req)
@@ -68,9 +70,17 @@ class ObterCliente(Resource):
         except Exception as e:
             return resp_exception('Cliente', description=str(e))
         session = Session()
-        session.query(Cliente).filter(Cliente.codCliente == codCliente).update(clienteAtualizado)
+        query = session.query(Cliente).filter(Cliente.codCliente == codCliente)
+        query.update(req, synchronize_session=False)
         session.commit()
-        result = schema.dump(clienteAtualizado)
+        for unidadeConsumidora in unidadesConsumidoras:
+            query = session.query(ClienteUnidadeConsumidora).filter(
+                     ClienteUnidadeConsumidora.codClienteUnidadeConsumidora == unidadeConsumidora['codClienteUnidadeConsumidora'])
+            query.update(unidadeConsumidora, synchronize_session=False)
+            session.commit()
+        query = session.query(Cliente).filter(Cliente.codCliente == codCliente)
+        cliente = query.one()
+        result = schema.dump(cliente)
         # Retorno 200 o meu endpoint
         return resp_ok(
             'Cliente', 'Cliente atualizado com sucesso', data=result,
